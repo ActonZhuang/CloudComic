@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.wallf.cloudcomic.fragment.MainFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -27,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, MainFragment.newInstance()).commit();
+        }
     }
 
     @Override
