@@ -1,8 +1,6 @@
 package com.wallf.cloudcomic.adapter;
 
 import android.content.Context;
-import android.media.Image;
-import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.wallf.cloudcomic.R;
 import com.wallf.cloudcomic.imageloader.ImageCache;
@@ -56,7 +55,7 @@ public class BookCoverAdapter extends RecyclerView.Adapter<BookCoverAdapter.Cove
     void initialData() {
         mItems = new ArrayList<>();
         for (String str : IMAGES) {
-            mItems.add(new ComicImage(str));
+            mItems.add(new ComicImage(str, str.substring(str.length() - 10)));
         }
     }
 
@@ -77,6 +76,7 @@ public class BookCoverAdapter extends RecyclerView.Adapter<BookCoverAdapter.Cove
     @Override
     public void onBindViewHolder(CoverViewHolder holder, int position) {
         ComicImage data = mItems.get(position);
+        holder.title.setText(data.getTitle());
         mImageWorker.loadImage(data.getUrl(), holder.cover);
     }
 
@@ -89,20 +89,23 @@ public class BookCoverAdapter extends RecyclerView.Adapter<BookCoverAdapter.Cove
 
         CardView cardView;
         ImageView cover;
+        TextView title;
 
         public CoverViewHolder(View itemView) {
             super(itemView);
 
             cardView = (CardView) itemView.findViewById(R.id.cardview);
             cover = (ImageView) itemView.findViewById(R.id.cover);
+            title = (TextView) itemView.findViewById(R.id.title);
         }
     }
 
 
     public class ComicImage {
 
-        public ComicImage(String url) {
+        public ComicImage(String url, String title) {
             this.setUrl(url);
+            this.setTitle(title);
         }
 
         public String getUrl() {
@@ -113,7 +116,18 @@ public class BookCoverAdapter extends RecyclerView.Adapter<BookCoverAdapter.Cove
             this.url = url;
         }
 
-        public String url;
+        String url;
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        String title;
+
     }
 
 

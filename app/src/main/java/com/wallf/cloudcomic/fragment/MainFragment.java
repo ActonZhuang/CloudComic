@@ -15,11 +15,17 @@ import android.view.ViewGroup;
 import com.wallf.cloudcomic.R;
 import com.wallf.cloudcomic.adapter.BookCoverAdapter;
 import com.wallf.cloudcomic.utils.ViewUtil;
+import com.wallf.cloudcomic.views.ContentScrollListener;
+
+import java.util.logging.Logger;
 
 /**
  * Created by dell on 2015/12/10.
  */
 public class MainFragment extends Fragment {
+
+
+    private ContentScrollListener contentScrollListener;
 
 
     public static MainFragment newInstance() {
@@ -30,6 +36,8 @@ public class MainFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (context instanceof ContentScrollListener)
+            contentScrollListener = (ContentScrollListener) context;
     }
 
     @Nullable
@@ -43,15 +51,24 @@ public class MainFragment extends Fragment {
     RecyclerView mRecyclerView;
     BookCoverAdapter mAdapter;
 
+//    View mToolbar;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+//        AppCompatActivity activity = (AppCompatActivity) getActivity();
+//        activity.setSupportActionBar(toolbar);
+
+//        mToolbar = view.findViewById(R.id.toolbar);
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.coverlist);
+
         setupRecyclerView();
     }
 
     private final int COLUMN_SPAN = 2;
+    private final int ITEM_SPACE = 4;
 
     void setupRecyclerView() {
 
@@ -63,9 +80,68 @@ public class MainFragment extends Fragment {
         int cellWidth = itemWidth();
         mAdapter.setImageSize(cellWidth, cellWidth);
 
-        mRecyclerView.addItemDecoration(new SpacesItemDecoration(ViewUtil.dip2px(getActivity(), 4f)));
+        mRecyclerView.addItemDecoration(new SpacesItemDecoration(ViewUtil.dip2px(getActivity(), ITEM_SPACE)));
+
+        mRecyclerView.addOnScrollListener(new RecyclerViewScrollListener(mRecyclerView.getPaddingTop()));
 
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    class RecyclerViewScrollListener extends RecyclerView.OnScrollListener {
+
+        int lastDy;
+        boolean flag;
+
+        int paddingTop = 0;
+
+        public RecyclerViewScrollListener(int padding) {
+            paddingTop = padding;
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+
+//        if (toolbar == null)
+//            throw new IllegalStateException("BooksFragment has not a reference of the main toolbar");
+            int position = recyclerView.computeVerticalScrollOffset();
+
+            Logger.getLogger(MainFragment.class.getName()).info(position + "");
+            // Is scrolling up
+            if (dy > 10 && position >= paddingTop) {
+
+                if (!flag) {
+
+                    showView();
+                    flag = true;
+                }
+
+                // is scrolling down
+            } else if (dy < -10) {
+
+                if (flag) {
+
+                    hideView();
+                    flag = false;
+                }
+            }
+
+            lastDy = dy;
+        }
+
+        public void showView() {
+//            view.startAnimation(AnimationUtils.loadAnimation(view.getContext(),
+//                    R.anim.translate_up_in));
+            if (contentScrollListener != null)
+                contentScrollListener.onScroll(ContentScrollListener.DOWN, 0);
+        }
+
+        public void hideView() {
+//            view.startAnimation(AnimationUtils.loadAnimation(view.getContext(),
+//                    R.anim.translate_up_out));
+            if (contentScrollListener != null)
+                contentScrollListener.onScroll(ContentScrollListener.UP, 0);
+        }
     }
 
     int itemWidth() {
@@ -78,7 +154,6 @@ public class MainFragment extends Fragment {
         int cellWidth = width / COLUMN_SPAN - ViewUtil.dip2px(getActivity(), 4f) * COLUMN_SPAN * 2;
 
         return cellWidth;
-
     }
 
     @Override
@@ -106,12 +181,8 @@ public class MainFragment extends Fragment {
 
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            outRect.left = space;
-            outRect.right = space;
-            outRect.bottom = space;
-            if (parent.getChildAdapterPosition(view) == 0) {
-                outRect.top = space;
-            }
+            super.getItemOffsets(outRect, view, parent, state);
+            outRect.set(space, space, space, space);
         }
     }
 }

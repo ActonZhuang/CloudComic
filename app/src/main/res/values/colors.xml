@@ -7,4 +7,8 @@
     <color name="colorCardShadow">#8c8c8c</color>
 
     <color name="windowBackground">#fcfcfc</color>
+
+    <color name="white">#ffffff</color>
+    <color name="cover_flag">#CC000000</color>
+    <color name="cover_author">#FF3F80B5</color>
 </resources>
