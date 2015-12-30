@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Created by acton on 2015/12/13.
+ * @author acton
  */
 public class BukaInputStream extends InputStream {
 

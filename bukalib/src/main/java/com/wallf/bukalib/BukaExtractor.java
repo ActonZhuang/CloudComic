@@ -1,10 +1,51 @@
 package com.wallf.bukalib;
 
+import java.io.FileNotFoundException;
+
 /**
- * Created by acton on 2015/12/12.
+ * @author acton
  */
 public class BukaExtractor {
+
+    private BukaFile mBukaFile;
+
     public static void main(String[] args) {
-        System.out.println("Hello, world!");
+        BukaExtractor extractor = new BukaExtractor();
+        //read buka file
+        try {
+            extractor.readBukaFile();
+            //create output dir
+            extractor.createOutputDir();
+            //extract *.buka to multi resource files
+            extractor.extractBukaFile();
+            //convert resource file to jpg
+            extractor.convertResources();
+            //clean temp file
+            extractor.clean();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (BadBukaException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readBukaFile() throws FileNotFoundException, BadBukaException {
+        mBukaFile = new BukaFile("65537.buka");
+    }
+
+    private void createOutputDir() {
+
+    }
+
+    private void extractBukaFile() {
+
+    }
+
+    private void convertResources() {
+
+    }
+
+    private void clean() {
+
     }
 }
