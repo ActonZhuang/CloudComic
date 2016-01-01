@@ -38,15 +38,21 @@ public class BukaExtractor {
     }
 
     private void readBukaFile() throws FileNotFoundException, BadBukaException {
-        mBukaFile = new BukaFile("65537.buka");
+        mBukaFile = new BukaFile("./input/213659/65542.buka");
     }
 
     private void createOutputDir() {
+        String comicName = mBukaFile.getComicName();
+        int chapterId = mBukaFile.getChapterId();
         File output = new File("output");
         if (!output.exists() || !output.isDirectory()) {
             output.mkdir();
         }
-        mOutputDir = output;
+        File targetDir = new File(output, comicName + "-" + chapterId);
+        if (!targetDir.exists() || !targetDir.isDirectory()) {
+            targetDir.mkdir();
+        }
+        mOutputDir = targetDir;
     }
 
     private void extractBukaFile() throws IOException {

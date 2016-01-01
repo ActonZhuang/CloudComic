@@ -20,6 +20,7 @@ import java.util.Set;
 public class BukaFile {
 
     public static final String BUKA_FILE_FLAG = "buka";
+    private static final int BUFFER_SIZE = 10 * 1024;
     private int mMinorVersion;
     private int mMajorVersion;
     private ChapterInfo mChapterInfo;
@@ -130,6 +131,7 @@ public class BukaFile {
             }
             //Read chapter info
             readChapterInfo();
+            mComicName = comicName;
         } else {
             throw new BadBukaException("not a buka file.");
         }
@@ -279,5 +281,11 @@ public class BukaFile {
         return null;
     }
 
-    private static final int BUFFER_SIZE = 10 * 1024;
+    public String getComicName() {
+        return mComicName;
+    }
+
+    public int getChapterId() {
+        return mChapterId;
+    }
 }
