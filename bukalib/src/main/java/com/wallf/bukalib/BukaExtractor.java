@@ -18,27 +18,33 @@ public class BukaExtractor {
 
     public static void main(String[] args) {
         BukaExtractor extractor = new BukaExtractor();
-        //read buka file
-        try {
-            extractor.readBukaFile();
-            //create output dir
-            extractor.createOutputDir();
-            //extract *.buka to multi resource files
-            extractor.extractBukaFile();
-            //convert resource file to jpg
-            extractor.convertResources();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BadBukaException e) {
-            e.printStackTrace();
-        } finally {
-            //clean temp file
-            extractor.clean();
+        File inputDir = new File("./input/103998");
+        String[] bukaFiles = inputDir.list();
+        for (int i = 0; i < bukaFiles.length; ++i) {
+            if (bukaFiles[i].endsWith(".buka")) {
+                //read buka file
+                try {
+                    extractor.readBukaFile(inputDir.getAbsolutePath() + "/" + bukaFiles[i]);
+                    //create output dir
+                    extractor.createOutputDir();
+                    //extract *.buka to multi resource files
+                    extractor.extractBukaFile();
+                    //convert resource file to jpg
+                    extractor.convertResources();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (BadBukaException e) {
+                    e.printStackTrace();
+                } finally {
+                    //clean temp file
+                    extractor.clean();
+                }
+            }
         }
     }
 
-    private void readBukaFile() throws FileNotFoundException, BadBukaException {
-        mBukaFile = new BukaFile("./input/213659/65542.buka");
+    private void readBukaFile(String bukafile) throws FileNotFoundException, BadBukaException {
+        mBukaFile = new BukaFile(bukafile);
     }
 
     private void createOutputDir() {
