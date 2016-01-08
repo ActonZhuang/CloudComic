@@ -1,5 +1,6 @@
 package com.wallf.cloudcomic;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.view.animation.AnimationUtils;
 
 import com.wallf.cloudcomic.fragment.MainFragment;
 import com.wallf.cloudcomic.views.ContentScrollListener;
+import com.wallf.cloudcomic.views.GlassView;
 
 public class MainActivity extends AppCompatActivity implements ContentScrollListener {
 
@@ -33,8 +35,10 @@ public class MainActivity extends AppCompatActivity implements ContentScrollList
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, GlassViewActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -20,10 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+    
         <activity
             android:name=".activity.ComicPagerActivityFragment"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".GlassViewActivity" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
