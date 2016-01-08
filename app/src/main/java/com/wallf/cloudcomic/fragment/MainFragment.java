@@ -1,6 +1,7 @@
 package com.wallf.cloudcomic.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wallf.cloudcomic.R;
+import com.wallf.cloudcomic.activity.ComicPagerActivityFragment;
 import com.wallf.cloudcomic.adapter.BookCoverAdapter;
+import com.wallf.cloudcomic.entity.ComicCover;
 import com.wallf.cloudcomic.utils.ViewUtil;
 import com.wallf.cloudcomic.views.ContentScrollListener;
 
@@ -22,7 +25,7 @@ import java.util.logging.Logger;
 /**
  * Created by dell on 2015/12/10.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements BookCoverAdapter.OnItemClickListener {
 
 
     private ContentScrollListener contentScrollListener;
@@ -45,7 +48,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
 
-        return inflater.inflate(R.layout.fragment_cover, container, false);
+        return inflater.inflate(R.layout.fragment_cover_list, container, false);
     }
 
     RecyclerView mRecyclerView;
@@ -79,12 +82,20 @@ public class MainFragment extends Fragment {
 
         int cellWidth = itemWidth();
         mAdapter.setImageSize(cellWidth, cellWidth);
+        mAdapter.setListener(this);
 
         mRecyclerView.addItemDecoration(new SpacesItemDecoration(ViewUtil.dip2px(getActivity(), ITEM_SPACE)));
 
         mRecyclerView.addOnScrollListener(new RecyclerViewScrollListener(mRecyclerView.getPaddingTop()));
 
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onItemClick(ComicCover cover) {
+
+        Intent intent = new Intent(getActivity(), ComicPagerActivityFragment.class);
+        startActivity(intent);
     }
 
     class RecyclerViewScrollListener extends RecyclerView.OnScrollListener {

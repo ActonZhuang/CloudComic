@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wallf.cloudcomic.R;
+import com.wallf.cloudcomic.entity.ComicCover;
 import com.wallf.cloudcomic.imageloader.ImageCache;
 import com.wallf.cloudcomic.imageloader.ImageFetcher;
 import com.wallf.cloudcomic.imageloader.ImageResizer;
@@ -27,7 +28,7 @@ public class BookCoverAdapter extends RecyclerView.Adapter<BookCoverAdapter.Cove
 
     ImageResizer mImageWorker;
 
-    List<ComicImage> mItems;
+    List<ComicCover> mItems;
 
     public BookCoverAdapter(Context context) {
         mContext = context;
@@ -55,7 +56,7 @@ public class BookCoverAdapter extends RecyclerView.Adapter<BookCoverAdapter.Cove
     void initialData() {
         mItems = new ArrayList<>();
         for (String str : IMAGES) {
-            mItems.add(new ComicImage(str, str.substring(str.length() - 10)));
+            mItems.add(new ComicCover(str, str.substring(str.length() - 10)));
         }
     }
 
@@ -70,12 +71,22 @@ public class BookCoverAdapter extends RecyclerView.Adapter<BookCoverAdapter.Cove
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.layout_cover, parent, false);
         CoverViewHolder holder = new CoverViewHolder(view);
+
         return holder;
     }
 
     @Override
     public void onBindViewHolder(CoverViewHolder holder, int position) {
-        ComicImage data = mItems.get(position);
+        final ComicCover data = mItems.get(position);
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null)
+                    mListener.onItemClick(data);
+            }
+        });
+
         holder.title.setText(data.getTitle());
         mImageWorker.loadImage(data.getUrl(), holder.cover);
     }
@@ -101,36 +112,6 @@ public class BookCoverAdapter extends RecyclerView.Adapter<BookCoverAdapter.Cove
     }
 
 
-    public class ComicImage {
-
-        public ComicImage(String url, String title) {
-            this.setUrl(url);
-            this.setTitle(title);
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-        String url;
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        String title;
-
-    }
-
-
     final static String[] IMAGES = new String[]{
             "http://b.hiphotos.baidu.com/zhidao/pic/item/0bd162d9f2d3572ca80cc2978913632763d0c38b.jpg",
             "http://b.hiphotos.baidu.com/zhidao/pic/item/cf1b9d16fdfaaf512a33009c8f5494eef11f7ac5.jpg",
@@ -141,4 +122,14 @@ public class BookCoverAdapter extends RecyclerView.Adapter<BookCoverAdapter.Cove
             "http://static.bbs.sgnet.cc/attachment/forum/201012/09/184929s087he0h4ybsbx6h.jpg",
             "http://news.5068.com/upfiles/allimg/110316/153Q344S-2.jpg"
     };
+
+    private OnItemClickListener mListener;
+
+    public void setListener(OnItemClickListener listener) {
+        this.mListener = listener;
+    }
+
+    public interface OnItemClickListener {
+        public void onItemClick(ComicCover cover);
+    }
 }
