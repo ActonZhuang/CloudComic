@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wallf.cloudcomic.R;
-import com.wallf.cloudcomic.activity.ComicPagerActivityFragment;
+import com.wallf.cloudcomic.activity.ComicPagerActivity;
 import com.wallf.cloudcomic.adapter.BookCoverAdapter;
 import com.wallf.cloudcomic.entity.ComicCover;
 import com.wallf.cloudcomic.utils.ViewUtil;
@@ -94,7 +94,7 @@ public class MainFragment extends Fragment implements BookCoverAdapter.OnItemCli
     @Override
     public void onItemClick(ComicCover cover) {
 
-        Intent intent = new Intent(getActivity(), ComicPagerActivityFragment.class);
+        Intent intent = new Intent(getActivity(), ComicPagerActivity.class);
         startActivity(intent);
     }
 

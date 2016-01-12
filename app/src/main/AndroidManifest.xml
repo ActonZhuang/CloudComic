@@ -22,8 +22,8 @@
         </activity>
     
         <activity
-            android:name=".activity.ComicPagerActivityFragment"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".activity.ComicPagerActivity"
+            android:theme="@style/AppTheme.TranslucentBar" />
         <activity android:name=".GlassViewActivity" />
     </application>
 

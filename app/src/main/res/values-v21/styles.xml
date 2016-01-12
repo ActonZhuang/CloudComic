@@ -1,4 +1,15 @@
-<resources>>
+<resources>
+
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+    </style>
 
     <style name="AppTheme.NoActionBar">
 
@@ -6,17 +17,9 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
-
         <item name="android:windowContentTransitions">true</item>
         <!--<item name="android:windowAllowEnterTransitionOverlap">true</item>-->
         <!--<item name="android:windowAllowReturnTransitionOverlap">true</item>-->
-
-        <!--theme color-->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/windowBackground</item>
-        <item name="android:navigationBarColor">@color/colorPrimary</item>
 
     </style>
 
