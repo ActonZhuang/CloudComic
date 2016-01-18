@@ -16,7 +16,11 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 
+import com.wallf.cloudcomic.ImageRenderer;
 import com.wallf.cloudcomic.R;
+
+import jp.co.cyberagent.android.gpuimage.GPUImageGaussianBlurFilter;
+import jp.co.cyberagent.android.gpuimage.PixelBuffer;
 
 /**
  * @author acton
@@ -47,6 +51,7 @@ public class GlassView extends RelativeLayout {
     private boolean mParentViewDrawn;
 
     private boolean mBlurBgEnabled = true;
+//    private GPUImageGaussianBlurFilter mBlurFilter;
 
     private ViewTreeObserver.OnGlobalLayoutListener mGlobalLayoutListener;
 
@@ -71,6 +76,9 @@ public class GlassView extends RelativeLayout {
         if (isInEditMode()) {
             mBlurBgEnabled = false;
             this.setAlpha(.5f);
+        } else {
+//            mBlurFilter  = new GPUImageGaussianBlurFilter();
+//            mBlurFilter.setBlurSize(1);
         }
         setWillNotDraw(false);
     }
@@ -94,6 +102,7 @@ public class GlassView extends RelativeLayout {
     public void setBlurRadius(float blurRadius) {
         if (0f < blurRadius && blurRadius <= MAX_BLUR_RADIUS) {
             mBlurRadius = blurRadius;
+//            mBlurFilter.setBlurSize(mBlurRadius);
             invalidate();
         }
     }
@@ -103,6 +112,18 @@ public class GlassView extends RelativeLayout {
     }
 
     private void applyBlur() {
+//        ImageRenderer renderer = new ImageRenderer(mBlurFilter);
+//        PixelBuffer buffer = new PixelBuffer(mOrigBitmap.getWidth(),
+//                mOrigBitmap.getHeight());
+//        buffer.setRenderer(renderer);
+//        renderer.setImageBitmap(mOrigBitmap, false);
+//        Bitmap source = buffer.getBitmap();
+//        if(mBlurredBitmap!=null){
+//            mBlurredBitmap.recycle();
+//        }
+//        mBlurredBitmap = source;
+//        renderer.deleteImage();
+//        buffer.destroy();
         mIn = Allocation.createFromBitmap(mRenderScript, mOrigBitmap);
         mOut = Allocation.createTyped(mRenderScript, mIn.getType());
         mBlur.setRadius(mBlurRadius);

@@ -35,9 +35,10 @@
     <com.wallf.cloudcomic.views.GlassView
         android:id="@+id/top_glass_view"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="100dp"
         android:layout_gravity="top"
-        android:background="#55000000">
+        android:background="#55000000"
+        app:downSampling="5">
 
         <TextView
             android:id="@+id/prompt_txt"
@@ -63,9 +64,9 @@
     <com.wallf.cloudcomic.views.GlassView
         android:id="@+id/bottom_glass_view"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="80dp"
         android:layout_gravity="bottom"
         android:background="#55ffffff"
-        app:downSampling="2"></com.wallf.cloudcomic.views.GlassView>
+        app:downSampling="5"></com.wallf.cloudcomic.views.GlassView>
 
 </FrameLayout>
