@@ -18,7 +18,7 @@ public class BukaExtractor {
 
     public static void main(String[] args) {
         BukaExtractor extractor = new BukaExtractor();
-        File inputDir = new File("./input/103998");
+        File inputDir = new File("./input/217208");
         String[] bukaFiles = inputDir.list();
         for (int i = 0; i < bukaFiles.length; ++i) {
             if (bukaFiles[i].endsWith(".buka")) {
