@@ -13,7 +13,7 @@ import com.wallf.cloudcomic.views.GlassView;
 /**
  * @author acton
  */
-public class GlassViewActivity extends AppCompatActivity {
+public class GlassViewActivity extends Activity {
 
     private int mCurImgResId = R.drawable.lolipop_bg;
 

@@ -23,12 +23,12 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/lolipop_bg" />
 
-            <ImageView
-                android:id="@+id/bg_img1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/test" />
+            <!--       <ImageView
+                       android:id="@+id/bg_img1"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:scaleType="centerCrop"
+                       android:src="@drawable/test" />-->
         </LinearLayout>
     </ScrollView>
 
