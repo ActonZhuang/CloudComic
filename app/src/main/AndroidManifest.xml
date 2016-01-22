@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name="com.wallf.cloudcomic.CloudComicApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,17 +15,24 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+            <!--            <intent-filter>
+                            <action android:name="android.intent.action.MAIN" />
+                            <category android:name="android.intent.category.LAUNCHER" />
+                        </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".GlassViewActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    
+
         <activity
             android:name=".activity.ComicPagerActivity"
             android:theme="@style/AppTheme.TranslucentBar" />
-        <activity android:name=".GlassViewActivity" />
+        <activity android:name="org.acra.CrashReportDialog" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
