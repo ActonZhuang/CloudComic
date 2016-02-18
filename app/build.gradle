@@ -17,6 +17,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        // set to true to turn off analysis progress reporting by lint
+        quiet false
+        // if true, stop the gradle build if errors are found
+        abortOnError false
+        // if true, only report errors
+        ignoreWarnings false
+    }
 }
 
 dependencies {
@@ -30,4 +39,6 @@ dependencies {
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.3.0'
     compile project(':webp-android')
     compile project(':wallf')
+    compile 'com.facebook.rebound:rebound:0.3.8'
+    provided 'com.android.support:support-annotations:23.1.1'
 }
