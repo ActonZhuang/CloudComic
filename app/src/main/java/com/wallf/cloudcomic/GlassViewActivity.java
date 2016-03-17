@@ -15,7 +15,7 @@ import com.wallf.cloudcomic.views.GlassView;
  */
 public class GlassViewActivity extends Activity {
 
-    private int mCurImgResId = R.mipmap.lolipop_bg;
+    private int mCurImgResId = R.drawable.lolipop_bg;
 
     private GlassView mTopGlassView;
     private GlassView mBottomGlassView;
@@ -68,10 +68,10 @@ public class GlassViewActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_img_switch) {
-            if (mCurImgResId == R.mipmap.lolipop_bg) {
-                mCurImgResId = R.mipmap.jellybean_bg;
+            if (mCurImgResId == R.drawable.lolipop_bg) {
+                mCurImgResId = R.drawable.jellybean_bg;
             } else {
-                mCurImgResId = R.mipmap.lolipop_bg;
+                mCurImgResId = R.drawable.lolipop_bg;
             }
             mBgImg.setImageResource(mCurImgResId);
             return true;

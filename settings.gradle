@@ -1,2 +1,4 @@
-include ':app', ':webp-android', ':cloudcomicdomain', ':wallf'
+include ':app', ':cloudcomicdomain', ':wallf'
+//include ':webp-android'
+include ':webp-android-aar'
 include ':bukalib'
